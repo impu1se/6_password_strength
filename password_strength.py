@@ -42,7 +42,7 @@ def main():
     if password and args.file:
         black_list = get_black_list(args.file)
         score = get_password_strength(password, black_list)
-        print(f'Your score is:{score}')
+        print('Your score is:{score}'.format(score))
     else:
         print("""You didn't input password or file with black list.
             For help enter the password_strength.py -h""")
