@@ -5,7 +5,7 @@ Together with the script attached file with the most frequent password.
 I hope that little script will help you to make right password!
  
 # How run this script
-Clone this program on your computer and run having written `python password_strength.py -f **top_10000_pass.txt**` ( when FILE is file with list password ). For help run `python password_strength.py -h` 
+Clone this program on your computer and run having written `python password_strength.py -f top_10000_pass.txt` ( when FILE is file with list password ). For help run `python password_strength.py -h` 
 
 # Warning
 If you don't input password or don't note file with password, you will get message about them.
