@@ -15,17 +15,13 @@ def get_user_password():
 
 def get_password_strength(password, black_list):
     score = 0
-    if re.search(r'[A-Z]', password):
-        score += 1
-    if re.search(r'[a-z]', password):
-        score += 1
-    if re.search(r'[0-9]', password):
-        score += 1
-    if re.search(r'[$#@!%^&*]', password):
-        score += 2
+    patterns = [r'[A-Z]', r'[a-z]', r'[0-9]', r'[$#@!%^&*]']
+    for pattern in patterns:
+        if re.search(pattern, password):
+            score += 1
     if len(password) >= 8:
-        score += 2
-    if len(password) == len(set(password)):
+        score += 3
+    if len(password) == len(set(password)) and len(password) >= 8:
         score += 3
     if password in black_list:
         score = 2
@@ -42,7 +38,7 @@ def main():
     if password and args.file:
         black_list = get_black_list(args.file)
         score = get_password_strength(password, black_list)
-        print('Your score is:{score}'.format(score))
+        print('Your score is: {}'.format(score))
     else:
         print("""You didn't input password or file with black list.
             For help enter the password_strength.py -h""")
