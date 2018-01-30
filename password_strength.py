@@ -1,11 +1,12 @@
 import argparse
 import re
+from string import punctuation
 from getpass import getpass
 
 
 def get_black_list(file_list):
-    with open(file_list, 'r') as f:
-        black_list = f.read().split()
+    with open(file_list, 'r') as file:
+        black_list = file.read().split()
         return black_list
 
 
@@ -15,13 +16,14 @@ def get_user_password():
 
 def get_password_strength(password, black_list):
     score = 0
-    patterns = [r'[A-Z]', r'[a-z]', r'[0-9]', r'[$#@!%^&*]']
+    safe_length = 8
+    patterns = [r'[A-Z]', r'[a-z]', r'[0-9]', r'[punctuation]']
     for pattern in patterns:
         if re.search(pattern, password):
             score += 1
-    if len(password) >= 8:
+    if len(password) >= safe_length:
         score += 3
-    if len(password) == len(set(password)) and len(password) >= 8:
+    if len(password) == len(set(password)) and len(password) >= safe_length:
         score += 3
     if password in black_list:
         score = 2
@@ -31,8 +33,11 @@ def get_password_strength(password, black_list):
 def main():
     parser = argparse.ArgumentParser(
         description='Show to how much your password is reliable')
-    parser.add_argument('-f', dest='file',
-                        help='Indicate file for black list')
+    parser.add_argument(
+        '-f', 
+        dest='file', 
+        help='Indicate file for black list'
+        )
     args = parser.parse_args()
     password = get_user_password()
     if password and args.file:
