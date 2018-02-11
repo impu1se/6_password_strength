@@ -17,7 +17,7 @@ def get_user_password():
 def get_password_strength(password, black_list):
     score = 0
     safe_length = 8
-    patterns = [r'[a-z]', r'[A-Z]', r'[0-9]', r'[punctuation]']
+    patterns = [r'[a-z]', r'[A-Z]', r'[0-9]', r'[{}]'.format(punctuation)]
     for pattern in patterns:
         if re.search(pattern, password):
             score += 1
