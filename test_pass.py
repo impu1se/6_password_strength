@@ -13,6 +13,7 @@ class FileTests(unittest.TestCase):
 	@classmethod
 	def tearDownClass(cls):
 		os.remove('empty_file.txt')
+		os.remove('top_password.txt')
 
 	def test_open_not_file(self):
 		self.assertRaises(FileNotFoundError, password_strength.get_black_list, '')

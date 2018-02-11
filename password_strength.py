@@ -1,4 +1,4 @@
-import argparse
+﻿import argparse
 import re
 from string import punctuation
 from getpass import getpass
@@ -11,13 +11,13 @@ def get_black_list(file_list):
 
 
 def get_user_password():
-    return getpass('Input your password: ')
+    return getpass('Input your password without space: ')
 
 
 def get_password_strength(password, black_list):
     score = 0
     safe_length = 8
-    patterns = [r'[A-Z]', r'[a-z]', r'[0-9]', r'[punctuation]']
+    patterns = [r'[a-z]', r'[A-Z]', r'[0-9]', r'[punctuation]']
     for pattern in patterns:
         if re.search(pattern, password):
             score += 1
@@ -25,7 +25,7 @@ def get_password_strength(password, black_list):
         score += 3
     if len(password) == len(set(password)) and len(password) >= safe_length:
         score += 3
-    if password in black_list:
+    if password in black_list and password != '':
         score = 2
     return score
 
@@ -40,7 +40,7 @@ def main():
         )
     args = parser.parse_args()
     password = get_user_password()
-    if password and args.file:
+    if ' ' not in password and 'txt' in args.file:
         black_list = get_black_list(args.file)
         score = get_password_strength(password, black_list)
         print('Your score is: {}'.format(score))
