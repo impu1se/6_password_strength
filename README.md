@@ -1,7 +1,7 @@
 # Password Strength Calculator
 This is project for people which want value them password    
 Script gets your password and show how strong and strength he is. Your score will be between 1 and 10.
-When 1 - the most bad , and 10 - the most good.    
+When 1 - the worst , and 10 - the best.    
 Together with the script attached file with the most frequent password.
 I hope that little script will help you to make right password!
  
